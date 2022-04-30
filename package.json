@@ -1,0 +1,27 @@
+{
+  "name": "ramany-boutique-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vital-Masks/Ramany-Boutique-Api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vital-Masks/Ramany-Boutique-Api/issues"
+  },
+  "homepage": "https://github.com/Vital-Masks/Ramany-Boutique-Api#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
