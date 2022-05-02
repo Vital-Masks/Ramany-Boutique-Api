@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+var bodyParser = require('body-parser')
 const url = 'mongodb://localhost:27017/ramany-boutique'
 const commonrouter = require('./router')
 
@@ -17,7 +18,8 @@ function databaseConnection() {
        console.log('Database Connected>>>>>>>>>>>>')
     })
 }
-    
+
+app.use(bodyParser.json())    
 app.use('/', commonrouter)
 
 
