@@ -1,21 +1,56 @@
 const express = require('express');
 const router = express.Router()
-const products = require('../persistence/product-collection')
+const productCollection = require('../persistence/product-collection')
 
 
-router.get('/',testFunc)
-
-async function testFunc(req,res){
-    try{
-        const produc = await products.find();
-        res.json(produc)
+router.post('/', createProduct)
+router.get('/', getAllProducts)
+router.get('/:productId', getProductById)
+router.delete('/:productId', deleteProduct)
 
 
-    }
-    catch(err){
-        res.send('Error', err)
-    }
+
+function createProduct(req,res,next){
+    const { body } = req
     
+    const product = new productCollection(body)
+
+    return product.save().then((result) => {
+        res.send({"status":"Product Saved Successfully"});
+        next();
+    }).catch((err) => {
+        return next(err)
+    })
 }
+
+function getAllProducts(req, res, next){
+    return productCollection.find().then((result) => {
+        res.send(result);
+        next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function getProductById(req, res, next){
+    const {params:{ productId }} = req
+    return productCollection.findById(productId).then((result) => {
+        res.send(result);
+        next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function deleteProduct(req, res, next){
+    const {params:{ productId }} = req
+    return productCollection.remove({_id:productId}).then((result) => {
+        res.send({"status":"Product Deleted Successfully"});
+        next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
 
 module.exports = router
