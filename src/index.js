@@ -1,10 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/ramany-boutique'
+var bodyParser = require('body-parser')
+// const url = 'mongodb://localhost:27017/ramany-boutique'
+const url = "mongodb+srv://yathushan:BQdEfkQANH6kT3Nu@cluster0.hodq8.mongodb.net/ramany-boutique?retryWrites=true&w=majority";
 const commonrouter = require('./router')
+var cors = require('cors')
 
 
 const app = express();
+app.use(cors())
 
 databaseConnection()
 serve()
@@ -17,7 +21,8 @@ function databaseConnection() {
        console.log('Database Connected>>>>>>>>>>>>')
     })
 }
-    
+
+app.use(bodyParser.json())    
 app.use('/', commonrouter)
 
 
