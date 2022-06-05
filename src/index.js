@@ -8,6 +8,8 @@ var cors = require('cors')
 
 
 const app = express();
+const port = process.env.port || 3000
+
 app.use(cors())
 
 databaseConnection()
@@ -26,9 +28,8 @@ app.use(bodyParser.json())
 app.use('/', commonrouter)
 
 
-
 function serve(){
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log("Server started")
 })
 }
