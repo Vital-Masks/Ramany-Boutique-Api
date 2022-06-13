@@ -1,7 +1,8 @@
 const mongoose =  require('mongoose')
 
 const mainCategorySchema = new mongoose.Schema({
-    mainCategoryName:{type: String, required: true}
+    categoryType:{type: String, required: true},
+    categoryName:{type: String, required: true}
 })
 
-module.exports = mongoose.model('mainCategory',mainCategorySchema)
+module.exports = mongoose.model('categories',mainCategorySchema)
