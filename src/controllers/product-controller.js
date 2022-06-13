@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router()
 const productCollection = require('../persistence/product-collection')
+const productLogics = require('../business-logics/product-logics')
 
 
 router.post('/', createProduct)
 router.get('/', getAllProducts)
 router.get('/:productId', getProductById)
+router.get('/category/:categoryId', getProductByCategory)
 router.delete('/:productId', deleteProduct)
 
 
@@ -24,10 +26,11 @@ function createProduct(req,res,next){
 }
 
 function getAllProducts(req, res, next){
-    return productCollection.find().then((result) => {
+      return productLogics.getAllProducts().then((result) => {
         res.send(result);
         next();
     }).catch((err) => {
+        
         return next(err)
     })
 }
@@ -37,6 +40,16 @@ function getProductById(req, res, next){
     return productCollection.findById(productId).then((result) => {
         res.send(result);
         next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function getProductByCategory(req, res, next){    
+    const {params:{ categoryId }} = req
+    console.log("res",categoryId)
+    return productCollection.find({categoryId: categoryId}).then((result) => {
+        res.send(result);
     }).catch((err) => {
         return next(err)
     })
