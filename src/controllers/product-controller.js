@@ -47,7 +47,6 @@ function getProductById(req, res, next){
 
 function getProductByCategory(req, res, next){    
     const {params:{ categoryId }} = req
-    console.log("res",categoryId)
     return productCollection.find({categoryId: categoryId}).then((result) => {
         res.send(result);
     }).catch((err) => {
