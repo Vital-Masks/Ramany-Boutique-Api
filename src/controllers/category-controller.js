@@ -9,6 +9,7 @@ router.get('/mainCategory', getAllMainCategorys)
 router.get('/:mainCategoryId', getMainCategoryById)
 router.get('/', getCategoryBycategoryType)
 router.delete('/:mainCategoryId', deleteMainCategory)
+router.put('/:mainCategoryId', updateCategoryById)
 
 // router.post('/occasionType', createOccasionType)
 // router.get('/occasionType', getAllOccasionTypes)
@@ -33,7 +34,7 @@ function createMainCategory(req,res,next){
 function getAllMainCategorys(req, res, next){
     return mainCategoryCollection.find().then((result) => {
         res.send(result);
-        next();
+        
     }).catch((err) => {
         return next(err)
     })
@@ -48,7 +49,14 @@ function getMainCategoryById(req, res, next){
         return next(err)
     })
 }
-
+function updateCategoryById(req,res,next){
+    console.log("rew",req.params, req.body)
+    const { params: {mainCategoryId}} = req
+    const categoryObject = req.body
+    return mainCategoryCollection.findByIdAndUpdate(mainCategoryId, categoryObject).then((result)=>{
+        res.send(result)
+    })
+}
 function getCategoryBycategoryType(req, res, next){
     const {query:{ categoryType }} = req
     return mainCategoryCollection.find({categoryType:categoryType}).then((result) => {
