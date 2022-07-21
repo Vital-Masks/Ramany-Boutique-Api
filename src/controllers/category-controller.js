@@ -24,7 +24,7 @@ function createMainCategory(req,res,next){
     const mainCategory = new mainCategoryCollection(body)
 
     return mainCategory.save().then((result) => {
-        res.send({"status":"MainCategory Saved Successfully!"});
+        res.send({"status":"MainCategory Saved Successfully"});
         next();
     }).catch((err) => {
         return next(err)
