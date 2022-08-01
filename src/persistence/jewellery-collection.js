@@ -18,8 +18,8 @@ const jewellerySchema = new mongoose.Schema({
     detailing: { type: String, required: false },
     style: { type: String, required: false },  
     customization: { type: String, required: false },
-    mainImage: { type: String, required: false },
-    subImage: { type: String, required: false },    
+    mainImage: { type: Object, required: false },
+    subImage: { type: Object, required: false },    
 })
 jewellerySchema.plugin(require('mongoose-autopopulate'));
 
