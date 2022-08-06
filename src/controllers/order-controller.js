@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router()
 const orderCollection = require('../persistence/order-collection')
-
+const orderLogics = require('../business-logics/order-logics')
+const clothCollection = require('../persistence/cloth-collection')
 
 router.post('/', createOrder)
 router.get('/', getAllOrders)
@@ -10,12 +11,9 @@ router.delete('/:orderId', deleteOrder)
 
 
 
-function createOrder(req,res,next){
+function  createOrder(req,res,next){
     const { body } = req
-    
-    const order = new orderCollection(body)
-
-    return order.save().then((result) => {
+    return orderLogics.createOrder(body).then((result) => {
         res.send({"status":"Order Saved Successfully"});
         next();
     }).catch((err) => {

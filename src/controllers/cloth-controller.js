@@ -15,7 +15,6 @@ router.put('/:clothId', updateClothById)
 
 function createcloth(req,res,next){
     const { body } = req
-    console.log("body",body)
     const cloth = new clothCollection(body)
 
     return cloth.save().then((result) => {
