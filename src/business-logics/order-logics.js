@@ -3,14 +3,14 @@ const clothCollection = require('../persistence/cloth-collection')
 const orderCollection = require('../persistence/order-collection')
 
 var orderLogics = {
-  //  getAlljewellerys: async function() {
-  //     return new Promise((resolve, reject) => {
-  //         return jewelleryCollection.find()
-  //         .then((s) => {
-  //             resolve(s)
-  //             })
-  //     })
-  // }
+    //  getAlljewellerys: async function() {
+    //     return new Promise((resolve, reject) => {
+    //         return jewelleryCollection.find()
+    //         .then((s) => {
+    //             resolve(s)
+    //             })
+    //     })
+    // }
 
     createOrder: async function (orderObj) {
         const cloth = new orderCollection(orderObj)
@@ -42,6 +42,21 @@ var orderLogics = {
                     })
 
                 })
+            }
+            if (orderObj.jewelleryDetails) {
+                jewelleryDetails = orderObj.jewelleryDetails
+                jewelleryDetails.forEach(jewellery => {
+                    jewelleryCollection.updateOne({ _id: jewellery.productId }, { $inc: { quantity: - jewellery.quantity } }, function (err, response) {
+                        if (err) {
+                            // callback(err);
+                            console.log("jewelleryErrorResponse", err)
+                        } else {
+                            console.log("jewelleryResponse", response)
+                        }
+                    })
+
+                })
+
             }
 
 

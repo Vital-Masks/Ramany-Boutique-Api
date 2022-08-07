@@ -28,10 +28,7 @@ const orderSchema = new mongoose.Schema({
         productId: { type: mongoose.Schema.ObjectId, ref: 'jewellerys', required: false, autopopulate: {
             select: '-mainImage -subImage' // remove listed fields from selection
           } },
-          sizeAndCount:[{
-            quantity: { type: Number, required: true },
-            size: { type: String, required: true }
-            }],
+        quantity: { type: Number, required: true },         
         netPrice: { type: Number, required: true }
     }]
 })
