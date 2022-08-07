@@ -18,7 +18,7 @@ const clothSchema = new mongoose.Schema({
     style: { type: String, required: false },
     washInstructions: { type: String, required: false },
     customAltrations: { type: String, required: false },
-    mainImage: { type: String, required: false },
+    mainImage: { type: Object, required: false },
     subImage: { type: Object, required: false },    
 })
 clothSchema.plugin(require('mongoose-autopopulate'));
