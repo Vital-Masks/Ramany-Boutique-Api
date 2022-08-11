@@ -8,7 +8,7 @@ const jewellerySchema = new mongoose.Schema({
     gender: { type: String, required: true },
     occasionTypeId: { type: Array, ref: 'categories', required: false, autopopulate: true },  
     jewelleryingCategoryId: { type: mongoose.Schema.ObjectId, ref: 'categories', required: false, autopopulate: true },
-    sizeAndCount: { type: Array, required: false },
+    quantity: { type: Number, required: false },
     price: { type: Number, required: false },
     discount: { type: Number, required: false },
     description: { type: String, required: false },
