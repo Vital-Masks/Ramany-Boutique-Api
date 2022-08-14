@@ -14,20 +14,17 @@ const orderSchema = new mongoose.Schema({
     status: { type: String, required: true },
     clothDetails: [{
         productName: { type: String, required: true },
-        productId: { type: mongoose.Schema.ObjectId, ref: 'cloths', required: false, autopopulate: {
-            select: '-mainImage -subImage' // remove listed fields from selection
-          } },
+        productId: { type: mongoose.Schema.ObjectId},
         sizeAndCount:[{
             quantity: { type: Number, required: true },
-            size: { type: String, required: true }
+            size: { type: String, required: true },
+            subTotal: { type: Number, required: true }
             }],
         netPrice: { type: Number, required: true }
     }],
     jewelleryDetails: [{
         productName: { type: String, required: true },
-        productId: { type: mongoose.Schema.ObjectId, ref: 'jewellerys', required: false, autopopulate: {
-            select: '-mainImage -subImage' // remove listed fields from selection
-          } },
+        productId: { type: mongoose.Schema.ObjectId},
         quantity: { type: Number, required: true },         
         netPrice: { type: Number, required: true }
     }]
@@ -37,9 +34,22 @@ orderSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('orders', orderSchema)
 
 
-// [{
+// clothDetails: [{
 //     productName: { type: String, required: true },
-//     productId: { type: mongoose.Schema.ObjectId, ref: 'cloths', required: false, autopopulate: true },
-//     quantity: { type: Number, required: true },
+//     productId: { type: mongoose.Schema.ObjectId, ref: 'cloths', required: false, autopopulate: {
+//         select: '-mainImage -subImage' // remove listed fields from selection
+//       } },
+//     sizeAndCount:[{
+//         quantity: { type: Number, required: true },
+//         size: { type: String, required: true }
+//         }],
 //     netPrice: { type: Number, required: true }
 // }],
+// jewelleryDetails: [{
+//     productName: { type: String, required: true },
+//     productId: { type: mongoose.Schema.ObjectId, ref: 'jewellerys', required: false, autopopulate: {
+//         select: '-mainImage -subImage' // remove listed fields from selection
+//       } },
+//     quantity: { type: Number, required: true },         
+//     netPrice: { type: Number, required: true }
+// }]
