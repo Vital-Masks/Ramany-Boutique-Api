@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const customerCollection = require('../persistence/customer-collection')
+const customerLogics = require('../business-logics/customer-logics')
 
 
 router.post('/', createCustomer)
@@ -12,11 +13,15 @@ router.delete('/:customerId', deleteCustomer)
 
 function createCustomer(req,res,next){
     const { body } = req
-    
-    const customer = new customerCollection(body)
 
-    return customer.save().then((result) => {
-        res.send({"status":"Customer Saved Successfully"});
+    return customerLogics.createCustomer(body).then((result) => {
+        if(!result){
+            res.status(400).send('Email already exists');
+        }
+        else{
+            res.send({"status":"Customer Saved Successfully", "customerDetail":result});
+        }
+        
         next();
     }).catch((err) => {
         return next(err)
