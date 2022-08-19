@@ -5,6 +5,7 @@ const orderLogics = require('../business-logics/order-logics')
 const clothCollection = require('../persistence/cloth-collection')
 
 router.post('/', createOrder)
+router.put('/updateStatus/:orderId',changeOrderStatus)
 router.get('/', getAllOrders)
 router.get('/:orderId', getOrderById)
 router.delete('/:orderId', deleteOrder)
@@ -45,6 +46,17 @@ function deleteOrder(req, res, next){
     return orderCollection.remove({_id:orderId}).then((result) => {
         res.send({"status":"Order Deleted Successfully"});
         next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function changeOrderStatus(req, res, next){
+    const { params:{ orderId }} = req
+    const { query:{ status }} = req.body
+    console.log("req", req)
+    return orderLogics.changeOrderStatus(orderId, status).then((result)=>{
+        res.send({"Status":"Success"})
     }).catch((err) => {
         return next(err)
     })
