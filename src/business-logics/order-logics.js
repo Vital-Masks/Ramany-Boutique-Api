@@ -1,16 +1,9 @@
 const jewelleryCollection = require('../persistence/jewellery-collection')
 const clothCollection = require('../persistence/cloth-collection')
-const orderCollection = require('../persistence/order-collection')
+const orderCollection = require('../persistence/order-collection');
+const { response } = require('express');
 
 var orderLogics = {
-    //  getAlljewellerys: async function() {
-    //     return new Promise((resolve, reject) => {
-    //         return jewelleryCollection.find()
-    //         .then((s) => {
-    //             resolve(s)
-    //             })
-    //     })
-    // }
 
     createOrder: async function (orderObj) {
         const cloth = new orderCollection(orderObj)
@@ -65,6 +58,13 @@ var orderLogics = {
         })
 
     },
+
+    changeOrderStatus: async function(orderId,status){
+        return orderCollection.updateOne({ _id: orderId }, { status: status }).then(response=>{
+            return response
+        })
+
+    }
 };
 
 module.exports = orderLogics
