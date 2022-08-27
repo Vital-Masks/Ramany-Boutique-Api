@@ -9,6 +9,7 @@ router.put('/updateStatus/:orderId',changeOrderStatus)
 router.get('/', getAllOrders)
 router.get('/:orderId', getOrderById)
 router.delete('/:orderId', deleteOrder)
+router.get('/customer/:customerId', getOrderByCustomerId)
 
 
 
@@ -17,6 +18,15 @@ function  createOrder(req,res,next){
     return orderLogics.createOrder(body).then((result) => {
         res.send({"status":"Order Saved Successfully"});
         next();
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function getOrderByCustomerId(req, res, next){    
+    const {params:{ customerId }} = req
+    return orderCollection.find({customerId: customerId}).then((result) => {
+        res.send(result);
     }).catch((err) => {
         return next(err)
     })
