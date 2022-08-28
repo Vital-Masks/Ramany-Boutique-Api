@@ -12,6 +12,7 @@ const orderSchema = new mongoose.Schema({
     customerId: { type: mongoose.Schema.ObjectId, ref: 'customer', required: false ,autopopulate: true},
     totalCost: { type: Number, required: true },
     status: { type: String, required: true },
+    orderType:{ type: String, required: true },
     clothDetails: [{
         productName: { type: String, required: true },
         productId: { type: mongoose.Schema.ObjectId},

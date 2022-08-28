@@ -6,6 +6,7 @@ const clothSchema = new mongoose.Schema({
     clothName: { type: String, required: true },
     clothCode: { type: String, required: true },
     gender: { type: String, required: true },
+    clothType:{type: String, required: true},
     occasionTypeId: { type: Array, ref: 'categories', required: false, autopopulate: true },  
     clothingCategoryId: { type: mongoose.Schema.ObjectId, ref: 'categories', required: false, autopopulate: true },
     sizeAndCount: { type: Array, required: false },
