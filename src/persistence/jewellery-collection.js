@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const jewellerySchema = new mongoose.Schema({
     jewelleryName: { type: String, required: true },
     jewelleryCode: { type: String, required: true },
+    jewelleryType:{type: String, required: true},
     gender: { type: String, required: true },
     occasionTypeId: { type: Array, ref: 'categories', required: false, autopopulate: true },  
     jewelleryingCategoryId: { type: mongoose.Schema.ObjectId, ref: 'categories', required: false, autopopulate: true },
