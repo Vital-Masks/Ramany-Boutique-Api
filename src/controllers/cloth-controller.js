@@ -6,6 +6,7 @@ const clothLogics = require('../business-logics/cloth-logics')
 
 router.post('/', createcloth)
 router.get('/', getAllCloths)
+router.get('/search', searchClothByKeyWord)
 router.get('/:clothId', getClothById)
 router.get('/category/:categoryId', getClothByCategory)
 router.delete('/:clothId', deleteCloth)
@@ -50,6 +51,17 @@ function updateClothById(req,res,next){
     const clothObject = req.body
     return clothCollection.findByIdAndUpdate(clothId, clothObject).then((result)=>{
         res.send(result)
+    })
+}
+
+function searchClothByKeyWord(req,res,next){
+    const { query : {keyword}} = req
+    console.log("ress", req)
+    const search = { $text: { $search: keyword } };
+    return clothCollection.find(search).then((result) => {
+        res.send(result);
+    }).catch((err) => {
+        return next(err)
     })
 }
 
