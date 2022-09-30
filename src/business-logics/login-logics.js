@@ -1,5 +1,6 @@
 const customerCollection = require('../persistence/customer-collection')
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const customerLogics = require('../business-logics/customer-logics')
 
 
@@ -20,7 +21,29 @@ var loginLogics = {
             }
 
         })
-    }
+    },
+
+    authenticateAdmin: async function (username, password){
+        if(username === 'admin' && password === 'admin@123'){
+            const token = await this.generateToken();
+            return token
+        }
+        
+    },
+
+    generateToken({ stringBase = 'base64', byteLength = 48 } = {}) {
+        return new Promise((resolve, reject) => {
+          crypto.randomBytes(byteLength, (err, buffer) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(buffer.toString(stringBase));
+            }
+          });
+        });
+      }
+
+
 
 
    

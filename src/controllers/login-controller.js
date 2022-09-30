@@ -11,9 +11,19 @@ function authenticateAdmin(req,res,next){
   const {params:{ username }} = req
   const {query:{ password }} = req.body
   
-    res.send({
-        token: 'test123'
+  return loginLogics.authenticateAdmin(username,password).then(result=>{
+    if(result ){
+      res.send({
+        token: result
       });
+    }
+    else{
+      res.send({
+        status: "Incorrect Username or Password"
+      });
+    }
+  })
+    
 }
 
 function authenticateCustomer(req,res,next){
