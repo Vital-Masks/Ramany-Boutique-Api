@@ -9,7 +9,7 @@ var cors = require('cors');
 
 const app = express();
 const hostname = 'localhost';
-const port = 3000;
+const port = 3001;
 
 app.use(cors());
 
@@ -26,7 +26,8 @@ function databaseConnection() {
 }
 
 app.use(bodyParser.json());
-app.use('/', commonrouter);
+// app.use('/', commonrouter);
+app.use('/api/', commonrouter);
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -37,10 +38,9 @@ app.use(
     parameterLimit: 50000,
   })
 );
-app.use('/api/', commonrouter);
 
 function serve() {
-  app.listen(3000, () => {
-    console.log('Server started');
+  app.listen(port, () => {
+    console.log(`Server running`);
   });
 }
