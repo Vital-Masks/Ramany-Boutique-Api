@@ -25,19 +25,20 @@ function databaseConnection() {
   });
 }
 
-app.use(bodyParser.json());
-// app.use('/', commonrouter);
-app.use('/api/', commonrouter);
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json({ limit: '50mb' }));
+// fixing "413 Request Entity Too Large" errors
+app.use(express.json({ limit: '500mb', extended: true }));
 app.use(
-  bodyParser.urlencoded({
-    limit: '50mb',
-    extended: true,
-    parameterLimit: 50000,
-  })
+  express.urlencoded({ limit: '500mb', extended: true, parameterLimit: 50000 })
 );
+
+app.use(bodyParser.json());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('The Ramya Boutique APIs!');
+});
+
+app.use('/api/', commonrouter);
 
 function serve() {
   app.listen(port, () => {
