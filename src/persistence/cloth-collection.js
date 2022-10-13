@@ -21,7 +21,10 @@ const clothSchema = new mongoose.Schema({
     customAltrations: { type: String, required: false },
     mainImage: { type: Object, required: false },
     subImage: { type: Object, required: false },    
-})
+},{ timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  } })
 clothSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('cloths', clothSchema)

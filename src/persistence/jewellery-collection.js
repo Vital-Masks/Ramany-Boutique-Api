@@ -21,7 +21,10 @@ const jewellerySchema = new mongoose.Schema({
     customization: { type: String, required: false },
     mainImage: { type: Object, required: false },
     subImage: { type: Object, required: false },    
-})
+},{ timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  } })
 jewellerySchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('jewellerys', jewellerySchema)

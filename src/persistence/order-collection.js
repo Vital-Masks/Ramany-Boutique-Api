@@ -29,7 +29,11 @@ const orderSchema = new mongoose.Schema({
         quantity: { type: Number, required: true },         
         netPrice: { type: Number, required: true }
     }]
-})
+},{ timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  } })
+
 orderSchema.plugin(require('mongoose-autopopulate'));
 
 module.exports = mongoose.model('orders', orderSchema)
