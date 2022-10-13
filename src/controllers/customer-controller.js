@@ -6,6 +6,7 @@ const customerLogics = require('../business-logics/customer-logics')
 
 router.post('/', createCustomer)
 router.get('/', getAllCustomers)
+router.put('/:customerId', updateCustomer)
 router.get('/:customerId', getCustomerById)
 router.delete('/:customerId', deleteCustomer)
 
@@ -34,6 +35,14 @@ function getAllCustomers(req, res, next){
         next();
     }).catch((err) => {
         return next(err)
+    })
+}
+
+function updateCustomer(req, res, next){
+    const { params: {customerId}} = req
+    const customerObject = req.body
+    return customerCollection.findByIdAndUpdate(customerId, customerObject).then((result)=>{
+        res.status(200).send(result)
     })
 }
 
