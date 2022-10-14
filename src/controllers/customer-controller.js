@@ -41,7 +41,8 @@ function getAllCustomers(req, res, next){
 function updateCustomer(req, res, next){
     const { params: {customerId}} = req
     const customerObject = req.body
-    return customerCollection.findByIdAndUpdate(customerId, customerObject).then((result)=>{
+    return customerCollection.findByIdAndUpdate(customerId, customerObject,{new: true}).then((result)=>{
+        console.log("result", result)
         res.status(200).send(result)
     })
 }

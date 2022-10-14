@@ -53,7 +53,7 @@ function updateCategoryById(req,res,next){
     console.log("rew",req.params, req.body)
     const { params: {mainCategoryId}} = req
     const categoryObject = req.body
-    return mainCategoryCollection.findByIdAndUpdate(mainCategoryId, categoryObject).then((result)=>{
+    return mainCategoryCollection.findByIdAndUpdate(mainCategoryId, categoryObject,{new: true}).then((result)=>{
         res.send(result)
     })
 }

@@ -49,7 +49,7 @@ function getClothById(req, res, next){
 function updateClothById(req,res,next){
     const { params: {clothId}} = req
     const clothObject = req.body
-    return clothCollection.findByIdAndUpdate(clothId, clothObject).then((result)=>{
+    return clothCollection.findByIdAndUpdate(clothId, clothObject, {new: true}).then((result)=>{
         res.send(result)
     })
 }

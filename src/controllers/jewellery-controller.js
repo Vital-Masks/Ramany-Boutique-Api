@@ -48,7 +48,7 @@ function getjewelleryById(req, res, next){
 function updatejewelleryById(req,res,next){
     const { params: {jewelleryId}} = req
     const jewelleryObject = req.body
-    return jewelleryCollection.findByIdAndUpdate(jewelleryId, jewelleryObject).then((result)=>{
+    return jewelleryCollection.findByIdAndUpdate(jewelleryId, jewelleryObject, {new: true}).then((result)=>{
         res.send(result)
     })
 }
