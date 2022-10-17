@@ -23,6 +23,15 @@ var customerLogics = {
         })
     },
 
+    updateCustomer: async function (customerId, customerObject){
+        customerObject.password = await this.createHashPasword(customerObject.password)
+        return customerCollection.findByIdAndUpdate(customerId, customerObject,{new: true}).then((result)=>{
+            console.log("result", result)
+            return result
+            // res.status(200).send(result)
+        })
+    },
+
     createHashPasword: async function (textPassword) {
         const hashedPassword = await bcrypt.hash(textPassword, saltRounds)
         return hashedPassword
