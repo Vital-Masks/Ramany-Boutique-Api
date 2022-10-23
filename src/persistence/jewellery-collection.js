@@ -15,6 +15,7 @@ const jewellerySchema = new mongoose.Schema({
     description: { type: String, required: false },
     inclusions: { type: String, required: false },
     gemStones: { type: String, required: false },
+    measurements:{ type: String, required: false },
     metalAndFinish: { type: String, required: false },
     detailing: { type: String, required: false },
     style: { type: String, required: false },  

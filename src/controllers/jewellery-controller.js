@@ -7,7 +7,8 @@ const jewelleryLogics = require('../business-logics/jewellery-logics')
 router.post('/', createjewellery)
 router.get('/', getAlljewellerys)
 router.get('/:jewelleryId', getjewelleryById)
-router.get('/category/:categoryId', getjewelleryByCategory)
+router.get('/jewelleryCategory/:jewelleryCategoryId', getjewelleryByjewelleryCategoryId)
+router.get('/occasionType/:occasionTypeId', getjewelleryByoccasionTypeId)
 router.delete('/:jewelleryId', deletejewellery)
 router.put('/:jewelleryId', updatejewelleryById)
 
@@ -53,9 +54,20 @@ function updatejewelleryById(req,res,next){
     })
 }
 
-function getjewelleryByCategory(req, res, next){    
-    const {params:{ categoryId }} = req
-    return jewelleryCollection.find({categoryId: categoryId}).then((result) => {
+function getjewelleryByjewelleryCategoryId(req, res, next){  
+    console.log("kxbvkxjb")  
+    const {params:{ jewelleryCategoryId }} = req
+    return jewelleryCollection.find({jewelleryingCategoryId: jewelleryCategoryId }).then((result) => {
+        res.send(result);
+    }).catch((err) => {
+        return next(err)
+    })
+}
+
+function getjewelleryByoccasionTypeId(req, res, next){  
+    console.log("kxbvkxjb")  
+    const {params:{ occasionTypeId }} = req
+    return jewelleryCollection.find({occasionTypeId: occasionTypeId }).then((result) => {
         res.send(result);
     }).catch((err) => {
         return next(err)
