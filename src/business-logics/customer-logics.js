@@ -24,7 +24,8 @@ var customerLogics = {
     },
 
     updateCustomer: async function (customerId, customerObject){
-        customerObject.password = await this.createHashPasword(customerObject.password)
+        if(customerObject.password) customerObject.password = await this.createHashPasword(customerObject.password)
+        
         return customerCollection.findByIdAndUpdate(customerId, customerObject,{new: true}).then((result)=>{
             console.log("result", result)
             return result
