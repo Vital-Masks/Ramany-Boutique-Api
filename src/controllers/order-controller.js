@@ -33,7 +33,7 @@ function getOrderByCustomerId(req, res, next){
 }
 
 function getAllOrders(req, res, next){
-    return orderCollection.find().then((result) => {
+    return orderCollection.find().sort({created_at:-1}).then((result) => {
         res.send(result);
         next();
     }).catch((err) => {
