@@ -27,7 +27,7 @@ var loginLogics = {
     },
 
     authenticateAdmin: async function (username, password){
-        if(username === 'admin' && password === 'admin@123'){
+        if(username === 'Kavi15' && password === '150102'){
             const token = await this.generateToken();
             return token
         }
